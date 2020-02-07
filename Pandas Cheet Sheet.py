@@ -219,5 +219,5 @@ print(pd.concat([s1,s2], ignore_index=True))
 print(pd.concat([s1,s2],keys = ['s1','s2'])) #key 생성
 pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name 붙이기
 
-
 # %%
+afjsljfoajgsijfa commit 되어라 얍
