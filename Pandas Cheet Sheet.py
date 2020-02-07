@@ -11,7 +11,7 @@ df = pd.DataFrame(
          "c" : [10, 11, 12]},
         index = [1,2,3]           
 )
-
+df
 #%% DataFrame에서 해당 row, column, 값 불러오기
 print(df[["a","c"]],'\n', df.loc[2],'\n')
 print(df.loc[3,"a"],'\n')
@@ -220,4 +220,22 @@ print(pd.concat([s1,s2],keys = ['s1','s2'])) #key 생성
 pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name 붙이기
 
 # %%
-afjsljfoajgsijfa commit 되어라 얍
+df1 = pd.DataFrame([['a',1],['b',2]],
+                   columns=['letter', 'number'])
+
+df2 = pd.DataFrame([['c',3],['d',4]],
+                   columns=['letter', 'number'])
+df2
+
+# %%
+pd.concat([df1, df2])
+# %%
+df3 = pd.DataFrame([['c',3,'cat'],['d',4,'dog']],
+                   columns=['letter', 'number','animal'])
+df3
+
+# %% 형태가 다른 두 개의 dataframe 합치기
+pd.concat([df1,df3])
+
+
+# %%
