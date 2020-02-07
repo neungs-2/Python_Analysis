@@ -177,7 +177,7 @@ df.reset_index(drop=True) #인덱스 초기화
 #%% Column 삭제
 df.drop(columns = ['A1'])
 
-# %% ***Tidy Data
+# %% *****Tidy Data
 
 df = pd.DataFrame({'A':{0:'a',1:'b',2:'c'},
                    'B':{0:1, 1:3, 2:5},
@@ -202,4 +202,22 @@ df2.pivot(index = 'foo', columns = 'bar', values = 'baz')
 df3 = df2.pivot(index = 'foo', columns = 'bar', values = 'baz').reset_index()
 # %% melt 활용
 df3.melt(id_vars=['foo'], value_vars=['A','B','C'])
+# %% df3를 foo와 bar로 정렬하기
+df3.melt(id_vars=['foo'], value_vars=['A','B','C']).sort_values(['foo','bar'])
+
+# %% 위의 데이터 컬럼 명 바꾸기
+df3.melt(id_vars=['foo'], value_vars=['A','B','C']).sort_values(['foo','bar']).rename(columns = {'value':'baz'})
+
+# %% concat을 활용한 데이터 합치기
+
+#데이터 s1,s2생성
+s1 = pd.Series(['a','b'])
+s2 = pd.Series(['c','d'])
+print(s1,'\n',s2)
+# %% s1, s2 합치기
+print(pd.concat([s1,s2], ignore_index=True))
+print(pd.concat([s1,s2],keys = ['s1','s2'])) #key 생성
+pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name 붙이기
+
+
 # %%
