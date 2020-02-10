@@ -220,4 +220,26 @@ print(pd.concat([s1,s2],keys = ['s1','s2'])) #key 생성
 pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name 붙이기
 
 # %%
-afjsljfoajgsijfa commit 되어라 얍
+df1 = pd.DataFrame([['a',1],['b',2]], columns=['letter','number'])
+df2 = pd.DataFrame([['c',3],['d',4]], columns=['letter', 'number'])
+
+print(df1)
+print(df2)
+
+#%% df1과 df3 합치기
+pd.concat([df1,df3])
+#%% join 해서 합치기
+df3 = pd.DataFrame([['c',3,'cat'],['d',4,'dof']], columns = ['letter','number','animal'])
+print(df3)
+pd.concat([df1,df3], join='inner')
+
+# %%
+df4 = pd.DataFrame([['bird','polly'],['monkey','george']], columns = ['animal','name'])
+df5 = pd.DataFrame([1], index=['a'])
+df6 = pd.DataFrame([2], index=['a'])
+print(df4,'\n')
+print(df5,'\n')
+print(df6)
+
+# %% 중복된 값(index)가 있는지 검증하는 것
+pd.concat([df5, df6], verify_integrity=True)
