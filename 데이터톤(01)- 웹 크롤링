@@ -67,13 +67,16 @@ suggestion_list
 
 # %% 게시물 내용 가져오기
 url = '/ucms/ogp/sug/view.do?menuNo=300011&sgId=217&pnum=1'
-base_url = "https://www.innogov.go.kr{url}"
+base_url = f"https://www.innogov.go.kr{url}"
 response = requests.get(base_url)
 
-# if response.status_code == 200:
-#     html = bs(response.text, 'html.parser')
-#     title = html.select('#content > div.vveiw_box1 > dl > dt')[0].get_text(strip= True)
-#     print(title)
+if response.status_code == 200:
+    html = bs(response.text, 'html.parser')
+    print(html.select('#content > div.vveiw_box1 > dl > dt'))
+
+    title = html.select('#content > div.vveiw_box1 > dl > dt')[0].get_text(strip= True)
+    print(title)
+
 
 # %%
 desc = html.select(
@@ -99,13 +102,15 @@ def get_suggestion_content(url):
     if response.status_code == 200:
         html = bs(response.text, 'html.parser')
         title = html.select(  #제목을 가져옴
+                '#content > div.vveiw_box1 > dl > dt')[0].get_text(strip=True)
+        desc  = html.select(  
                 '#content > div.vveiw_box1 > div.vveiw_name > ul > li > dl > dd')
         category = desc[0].get_text(strip=True)
         content = html.select('#content > div.vveiw_box1 > div.vveiw_cont > div > pre')[0].get_text(strip=True)
         start = desc[1].get_text(strip=True)
         end = desc[2].get_text(strip=True)
         author = desc[3].get_text(strip=True)
-        vote = html.select('#conunter')[0].get_text(strip = True) #추천인
+        vote = html.select('#counter')[0].get_text(strip = True) #추천인
         sgld = url.split('=')[2].split('&')[0]
 
         article.append(sgld)
@@ -121,8 +126,26 @@ def get_suggestion_content(url):
         time.sleep(random.randint(1,2))
         return article
 
+# %% 각 게시물의 세부내용 가져오기
+data = []
 
+#tqdm을 사용해서 어느 정도 가져왔는지 확인
+for i, suggestion in tqdm(enumerate(suggestion_list)):
+    #list에 있는 게시물에 접근해서 내용을 가져온다
+    s = get_suggestion_content(suggestion)
+    data.append(s)
 
-
-
+# %% data를 DataFrame화 시키기
+column_names = ['sgId','title','category','content','start','end','vote','author']
+data = pd.DataFrame(data, columns = column_names)
+data.head()
+#%%
+data.tail()
 # %%
+data['category'].value_counts()
+#%%
+data.to_csv('suggestion.csv',index=False)
+#%%
+pd.read_csv('suggestion.csv').head()
+#%%
+data.shape
