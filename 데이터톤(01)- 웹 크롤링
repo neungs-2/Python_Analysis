@@ -66,16 +66,63 @@ print(len(suggestion_list))
 suggestion_list
 
 # %% 게시물 내용 가져오기
-url = ''
+url = '/ucms/ogp/sug/view.do?menuNo=300011&sgId=217&pnum=1'
 base_url = "https://www.innogov.go.kr{url}"
 response = requests.get(base_url)
 
-if response.status_code == 200:
-    html = bs(response.text, 'html.parser')
-    title = html.select('#content > div.vveiw_box1 > dl > dt')[0].get_text(strip= True)
-    print(title)
+# if response.status_code == 200:
+#     html = bs(response.text, 'html.parser')
+#     title = html.select('#content > div.vveiw_box1 > dl > dt')[0].get_text(strip= True)
+#     print(title)
 
 # %%
-desc = html.select('#content > div.vveiw_box1 > div.vveiw_name > ul > li > dl > dd')
+desc = html.select(
+    '#content > div.vveiw_box1 > div.vveiw_name > ul > li > dl > dd')
 category = desc[0].get_text(strip = True)
-print(desc[0])
+print(desc[0].get_text(strip= True))
+print(desc[1].get_text(strip= True))
+print(desc[2].get_text(strip= True))
+print(desc[3].get_text(strip= True))
+
+
+# %% id 값을 저장해주기 위해 미리 추출해보기
+u = 'view.do?menuNo=300011&sgId=150&pnum=1'
+u.split('=')[2].split('&')[0]
+
+#%% 목록 리스트에 있는 url을 넘겨주면 내용을 크롤링하는 함수
+
+def get_suggestion_content(url):
+    article = []
+    base_url = f"https://www.innogov.go.kr/{url}"
+    response = requests.get( base_url )
+
+    if response.status_code == 200:
+        html = bs(response.text, 'html.parser')
+        title = html.select(  #제목을 가져옴
+                '#content > div.vveiw_box1 > div.vveiw_name > ul > li > dl > dd')
+        category = desc[0].get_text(strip=True)
+        content = html.select('#content > div.vveiw_box1 > div.vveiw_cont > div > pre')[0].get_text(strip=True)
+        start = desc[1].get_text(strip=True)
+        end = desc[2].get_text(strip=True)
+        author = desc[3].get_text(strip=True)
+        vote = html.select('#conunter')[0].get_text(strip = True) #추천인
+        sgld = url.split('=')[2].split('&')[0]
+
+        article.append(sgld)
+        article.append(title)
+        article.append(category)
+        article.append(content)
+        article.append(start)
+        article.append(end)
+        article.append(vote)
+        article.append(author)
+        print(article)
+
+        time.sleep(random.randint(1,2))
+        return article
+
+
+
+
+
+# %%
