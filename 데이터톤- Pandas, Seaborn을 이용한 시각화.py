@@ -140,9 +140,23 @@ from scipy.stats import norm
 sns.distplot(df['vote'], fit=norm)
 
 # %% 종료된 제안 수
-df[dfp'end'] < '2019-06-17'].shape
+df[df['end'] < '2019-06-17'].shape
 #%% 종료 여부 컬럼 생성, 종료 여부 건 비교
 df['close'] = df['end'] < '2019-06-17'
 df['close'].value_counts()
+
+# %%
+preview_columns = ['sgId','title','category','content','vote','start']
+df_top_vote = df.sort_values(by='vote', ascending=False).head(10)
+df_top_vote[preview_columns]
+
+# %% 100개 이상 투표를 받은 제안
+df_vote_100 = df.loc[df['vote'] > 100, preview_columns]
+print('100개 이상 투표를 받은 제안:', len(df_vote_100))
+df_vote_100
+
+# %% 건수가 최대인 일반행정 분야의 제안을 투표수 별 정렬
+df[df['category'] == '일반행정'].sort_values(by = 'vote', ascending= False).head()
+
 
 # %%
