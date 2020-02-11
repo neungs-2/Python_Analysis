@@ -33,9 +33,9 @@ if response.status_code == 200:
 
 # %% 페이지 번호를 추가해가며 크롤링해 오는 함수
 def get_suggestion_list(pnum):
-    print(f'year_month:{year_month}, pnum:{pnum}')
+    # print(f'year_month:{year_month}, pnum:{pnum}')
     
-    base_url = f"https://www.innogov.go.kr/ucms/ogp/sug/list.do?pnum={pnum}&menuNo=300011&cateCd=&status1Cd=&Status2Cd=&searchText=&sugMonthTp={year_month}&orderKey=registDtDesc"
+    base_url = f"https://www.innogov.go.kr/ucms/ogp/sug/list.do?pnum={pnum}&menuNo=300011&cateCd=&status1Cd=&Status2Cd=&searchText=&sugMonthTp=&orderKey=registDtDesc"
     response = requests.get(base_url)
 
     if response.status_code == 200: #200이라는 코드는 Okay라는 뜻
@@ -141,6 +141,7 @@ data = pd.DataFrame(data, columns = column_names)
 data.head()
 #%%
 data.tail()
+
 # %%
 data['category'].value_counts()
 #%%
@@ -149,3 +150,6 @@ data.to_csv('suggestion.csv',index=False)
 pd.read_csv('suggestion.csv').head()
 #%%
 data.shape
+
+
+# %%
