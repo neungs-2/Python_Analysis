@@ -1,1 +1,134 @@
-new
+#%% 
+import numpy as np
+#%% *************************** Array ***************************
+# vector 형태
+test = np.array([1, 4, 5, 8],float)
+print(test)
+print(type(test[3]))
+print(test.dtype) 
+print(test.shape) #Array 형태 반환
+
+# %%
+test = np.array([1, 4, 5, '8'],float)
+print(test)
+type(test[3])
+
+# %%
+test = np.array([1, 4, 5, '8'],str)
+print(test)
+type(test[3])
+
+# %% matrix형태
+matrix = [[1,2,5,8],[1,2,5,8],[1,2,5,8]]
+np.array(matrix,int).shape
+
+# %% 3차원 매트릭스 형태
+tensor =  [ [[1,2,5,8],[1,2,5,8],[1,2,5,8]],
+            [[1,2,5,8],[1,2,5,8],[1,2,5,8]],
+            [[1,2,5,8],[1,2,5,8],[1,2,5,8]] ]
+np.array(tensor, int).shape
+
+# %% ndim: 몇 차원인지
+np.array(tensor, int).ndim
+# %% size: 데이터의 총 개수
+np.array(tensor, int).size
+
+
+# %% *********************** reshape ***********************
+test_matrix = [[1,2,5,8],[1,2,3,4]]
+print(np.array(test_matrix).shape)
+print(np.array(test_matrix). reshape(8,))
+np.array(test_matrix). reshape(8,).shape
+
+# %% Array의 size 만 같다면 다차원으로 자유롭게 변형가능
+np.array(test_matrix).reshape(2,4).shape
+# %% -1: size를 기반으로 row개수 선정
+np.array(test_matrix).reshape(-1,2).shape
+# %%
+np.array(test_matrix).reshape(2,2,2)
+
+# %% flatten: 다차원 array를 1차원 array로 변환
+test_matrix = [[[1,2,3,4], [1,2,5,7]] ,[[2,4,6,8],[1,3,5,7]]]
+np.array(test_matrix).flatten()
+
+
+# %% ************************** indexing & slicing **************************
+# indexing
+a = np.array([[1,2,3],[4.5,5,6]],int)
+print(a)
+print(a[0,0])
+print(a[0][0]) 
+
+a[0,0] = 5
+print(a)
+
+# %% slicing
+a = np.array([ [1,2,3,4,5],[6,7,8,9,10] ], int)
+print(a[:,2:])  # row(a:b), column(c:d)
+print(a[1,1:3])
+print(a[1:3])
+
+# %% *********************** Creation Function
+# arange: array의 범위를 지정하여, 값의 list를 생성하는 명령어
+a = np.arange(30)
+b = np.arange(0,5,0.5) #시작, 끝, step
+c = np.arange(30).reshape(5,6)
+print(a,type(a))
+print(b)
+print(c)
+
+# %% 리스트 타입으로 반환
+a = np.arange(30).tolist()
+print(a, type(a))
+
+# %% zeros: 0으로 가득찬 ndarray생성
+np.zeros(shape= (10,), dtype= np.int8)
+# %%
+np.zeros((2,5))
+
+# %% ones: 1로 가득찬 ndarray 생성
+np.ones(shape=(10,), dtype=np.int8)
+# %%
+np.ones((2,5))
+
+# %% empty: shape만 주어지고 비어있는 ndarray 생성 
+#(memory initialization이 되지 않음)
+np.empty(shape=(10,), dtype=np.int8)
+# %%
+np.empty((3,5))
+
+# %% something_like: 기존 ndarray의 shape 크기 만큼 1,0 또는 empty array 반환
+test_matrix = np.arange(30).reshape(5,6)
+a = np.ones_like(test_matrix)
+b = np.zeros_like(test_matrix)
+print(a,'\n',b)
+
+
+# %% idintity: 단위행렬(i 행렬)을 생성함
+np.identity(n= 3, dtype= np.int8)
+# %%
+np.identity(5)
+
+#%% eye: 대각선이 1인 행렬, k값의 시작 index의 변경이 가능
+np.eye(N=3, M=5, dtype=np.int8)
+# %%
+np.eye(3) # identity행렬과 거의 동일
+# %%
+np.eye(3,5,k=2) #k -> start point
+
+
+# %% diag: 대각행렬의 값을 추출함
+matrix = np.arange(9).reshape(3,3)
+np.diag(matrix)
+# %%
+np.diag(matrix, k=1) # k-> start point
+
+
+# %% random sampling: 데이터 분포에 따른 sampling으로 array를 생성
+# uniform(최저,최고,개수) 인 균등분포
+np.random.uniform(0,1,10).reshape(2,5) 
+
+# %% normal(평균,분산,개수) 인 정규분포
+np.random.normal(0,1,10).reshape(2,5)
+
+# %%
