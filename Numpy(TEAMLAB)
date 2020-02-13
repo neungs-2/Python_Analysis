@@ -131,4 +131,55 @@ np.random.uniform(0,1,10).reshape(2,5)
 # %% normal(평균,분산,개수) 인 정규분포
 np.random.normal(0,1,10).reshape(2,5)
 
+# %% ********************* array operation *********************
+test_a = np.array([[1,2,3],[4,5,6]], float)
+#shape이 같을때 같은 위치 cell 숫자끼리 연산
+print(test_a + test_a)
+print(test_a - test_a)
+print(test_a * test_a) 
+
+# %% Dot product: Matrix의 기본연산
+test_a = np.arange(1,7).reshape(2,3)
+test_b = np.arange(7,13).reshape(3,2)
+test_a.dot(test_b)
+
+# %% transpose / T attribute: 전치행렬
+print(test_a,'\n')
+print(test_a.transpose(),'\n')
+print(test_a.T)
+print(test_a.T.dot(test_a))
+
+# %% broadcasting: shape이 다른 배열 간 연산을 지원하는 기능 --> 자동연산
+test_matrix = np.array([[1,2,3],[4,5,6]], float)
+scalar = 3
+
+print(test_matrix + scalar)
+print(test_matrix * scalar)
+print(test_matrix / scalar)
+print(test_matrix // scalar)
+# %%
+test_matrix = np.arange(1,13).reshape(4,3)
+test_vector = np.arange(10,40,10)
+test_matrix + test_vector
+
+
+
+# %% Numpy performance
+
+def scalar_vector_product(scalar, vector):
+    result = []
+    for value in vector:
+        result.append(scalar*value)
+    return result
+
+iternation_max = 10000000
+
+vector = list(range(iternation_max))
+scalar = 2
+
+%timeit scalar_vector_product(scalar, vector) # for loop를 이용한 성능
+%timeit [scalar*value for value in range(iternation_max)]
+%timeit np.arange(iternation_max)*scalar
+#timeit: jupyter 환경에서 코드의 퍼포먼스를 체크하는 함수
+
 # %%
