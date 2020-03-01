@@ -11,7 +11,7 @@ import numpy as np
 import seaborn as sns
 import folium
 
-# %matplotlib inline # 노트북 안에서 그래프를 표시하기 위해
+%matplotlib inline # 노트북 안에서 그래프를 표시하기 위해
 
 #%%
 import matplotlib.pyplot as plt
