@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 #%% ****************** Syntax ******************
-# DataFrame ìƒì„±
+# DataFrame ?ƒ?„±
 df = pd.DataFrame(
         {"a" : [4,5,6],
          "b" : [7,8,9],
@@ -12,12 +12,12 @@ df = pd.DataFrame(
         index = [1,2,3]           
 )
 df
-#%% DataFrameì—ì„œ í•´ë‹¹ row, column, ê°’ ë¶ˆëŸ¬ì˜¤ê¸°
+#%% DataFrame?—?„œ ?•´?‹¹ row, column, ê°? ë¶ˆëŸ¬?˜¤ê¸?
 print(df[["a","c"]],'\n', df.loc[2],'\n')
 print(df.loc[3,"a"],'\n')
 print(df.loc[[1,2],['a','c']],'\n')
 
-#%% ì—¬ëŸ¬ ê°œì˜ Indexê°€ ìˆëŠ” DataFrame ìƒì„±
+#%% ?—¬?Ÿ¬ ê°œì˜ Indexê°? ?ˆ?Š” DataFrame ?ƒ?„±
 df = pd.DataFrame(
         {'a': [4,5,6,6],
          'b': [7,8,9,9],
@@ -31,13 +31,13 @@ df
 
 
 #%% *************************  Subset  *************************
-# íŠ¹ì • ê°’ê³¼ ë¹„êµí•œ ê°’ë§Œ ê°€ì ¸ì˜¤ëŠ” ë²•
+# ?Š¹? • ê°’ê³¼ ë¹„êµ?•œ ê°’ë§Œ ê°?? ¸?˜¤?Š” ë²?
 print(df[df.a <= 5],'\n')
 print(df[df['b'] <= 8],'\n')
 print(df['b']!=7,'\n')
 print(df[df['b']!=7],'\n')
 
-#%%ì¤‘ë³µëœ í–‰ì„ ì œê±°
+#%%ì¤‘ë³µ?œ ?–‰?„ ? œê±?
 df = df.drop_duplicates()
 print(df)
 #%%
@@ -53,19 +53,19 @@ df = pd.DataFrame(
 print()
 print(df,'\n')
 
-#%% isin() í•´ë‹¹ê°’ì´ í¬í•¨ ì—¬ë¶€ T/F
-#   isnull()/notnull() null ì—¬ë¶€ T/F
-print(df.a.isin([5,6])) # aì—´ì— 5 ë˜ëŠ” 6 í¬í•¨ ì—¬ë¶€
-print(df['a'].isin([5,6]),'\n') #ê°™ì€ ê²°ê³¼
+#%% isin() ?•´?‹¹ê°’ì´ ?¬?•¨ ?—¬ë¶? T/F
+#   isnull()/notnull() null ?—¬ë¶? T/F
+print(df.a.isin([5,6])) # a?—´?— 5 ?˜?Š” 6 ?¬?•¨ ?—¬ë¶?
+print(df['a'].isin([5,6]),'\n') #ê°™ì?? ê²°ê³¼
 
 print(pd.isnull(df))
 print(df['b'].isnull())
-print(df['b'].isnull().sum(),'\n') #null ê°’ ê°œìˆ˜
+print(df['b'].isnull().sum(),'\n') #null ê°? ê°œìˆ˜
 
 print(pd.notnull(df))
 print(df.notnull().sum())
 
-# and, or, not, xor, any, all  -->DataFrameì—ì„œ ì‚¬ìš© ë¶ˆê°€
+# and, or, not, xor, any, all  -->DataFrame?—?„œ ?‚¬?š© ë¶ˆê??
 #     &, |, ~, ^, df.any(), df.all()
 
 #%%
@@ -79,57 +79,57 @@ df[['sepal_width','sepal_length','species']]
 #%%
 df.sepal_length
 
-# %% 'ì •ê·œí‘œí˜„ì‹'ì— í•´ë‹¹ë˜ëŠ” ì—´ë§Œ ê°€ì ¸ì˜¤ê¸°
-print(df.filter(regex='_')) #_ê°€ í¬í•¨
-print(df.filter(regex='length$')) #lengthë¡œ ëë‚˜ëŠ”
-print(df.filter(regex='^sepal')) #sepalë¡œ ì‹œì‘í•˜ëŠ”
-df.filter(regex='^(?!species).*') #(?!species)ë¬¸ìê°€ ë“¤ì–´ê°„ ê²ƒ ë¹¼ê³  ê°€ì ¸ì™€ë¼
+# %% '? •ê·œí‘œ?˜„?‹'?— ?•´?‹¹?˜?Š” ?—´ë§? ê°?? ¸?˜¤ê¸?
+print(df.filter(regex='_')) #_ê°? ?¬?•¨
+print(df.filter(regex='length$')) #lengthë¡? ??‚˜?Š”
+print(df.filter(regex='^sepal')) #sepalë¡? ?‹œ?‘?•˜?Š”
+df.filter(regex='^(?!species).*') #(?!species)ë¬¸ìê°? ?“¤?–´ê°? ê²? ë¹¼ê³  ê°?? ¸????¼
 
-# %% ì§€ì • ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
-df.loc[2:4,'sepal_width':'petal_length'] #(a:b)í–‰, (c:d)ì—´ ë¶ˆëŸ¬ì˜¤ê¸°
-df.iloc[-5:,[1,3]] #(a:b-1)í–‰, (c,d-1)ì—´ ë¶ˆëŸ¬ì˜¤ê¸°
-# %% sepal_lengthê°€ 5ë³´ë‹¤ í° ë°ì´í„°ì˜ length, width ì—´ì„ ë¶ˆëŸ¬ì˜¤ê¸°
+# %% ì§?? • ?°?´?„° ë¶ˆëŸ¬?˜¤ê¸?
+df.loc[2:4,'sepal_width':'petal_length'] #(a:b)?–‰, (c:d)?—´ ë¶ˆëŸ¬?˜¤ê¸?
+df.iloc[-5:,[1,3]] #(a:b-1)?–‰, (c,d-1)?—´ ë¶ˆëŸ¬?˜¤ê¸?
+# %% sepal_lengthê°? 5ë³´ë‹¤ ?° ?°?´?„°?˜ length, width ?—´?„ ë¶ˆëŸ¬?˜¤ê¸?
 df.loc[df.sepal_length > 5, ['sepal_length','sepal_width']]
 
 
 # %%  ********************** Summarize Data **************************
-df.shape #(í–‰,ì—´) ê°œìˆ˜
-len(df) #í–‰ ê°œìˆ˜
+df.shape #(?–‰,?—´) ê°œìˆ˜
+len(df) #?–‰ ê°œìˆ˜
 df.head(3)
 
-# %% Row ì¢…ë¥˜ì™€ í•´ë‹¹ ë°ì´í„° ê°œìˆ˜ *ìœ ìš©í•¨
+# %% Row ì¢…ë¥˜??? ?•´?‹¹ ?°?´?„° ê°œìˆ˜ *?œ ?š©?•¨
 df['species'].value_counts()
 df['sepal_length'].value_counts()
-df['species'].nunique()   #Row ì¢…ë¥˜ ìˆ˜ 
+df['species'].nunique()   #Row ì¢…ë¥˜ ?ˆ˜ 
 
-# %% ìˆ˜ì¹˜í˜• ë°ì´í„° í†µê³„ê°’
-df.describe()  #ìˆ˜ì¹˜í˜• ì•„ë‹ˆë©´ ì•ˆë‚˜ì˜´
-df.describe(include = 'all') # ëª¨ë‘ ë‚˜ì˜´
-df.describe(include = [np.object]) #ë²”ì£¼í˜•(?)ë§Œ
-df.describe(include = [np.number]) #ìˆ˜ì¹˜í˜•ë§Œ == describe()
+# %% ?ˆ˜ì¹˜í˜• ?°?´?„° ?†µê³„ê°’
+df.describe()  #?ˆ˜ì¹˜í˜• ?•„?‹ˆë©? ?•ˆ?‚˜?˜´
+df.describe(include = 'all') # ëª¨ë‘ ?‚˜?˜´
+df.describe(include = [np.object]) #ë²”ì£¼?˜•(?)ë§?
+df.describe(include = [np.number]) #?ˆ˜ì¹˜í˜•ë§? == describe()
 
 
-# %% ì—¬ëŸ¬ í†µê³„ëŸ‰
-df.sum() #í•©
-df['sepal_length'].sum() #íŠ¹ì • columnë§Œ (ì•„ë˜ë„ ë™ì¼)
+# %% ?—¬?Ÿ¬ ?†µê³„ëŸ‰
+df.sum() #?•©
+df['sepal_length'].sum() #?Š¹? • columnë§? (?•„?˜?„ ?™?¼)
 df.count() #ê°œìˆ˜
-df.median() #ì¤‘ì•™ê°’
+df.median() #ì¤‘ì•™ê°?
 df.min() #ìµœì†Œ
-df.max() #ìµœëŒ€
-df.mean() #í‰ê· 
+df.max() #ìµœë??
+df.mean() #?‰ê·?
 df.var() #ë¶„ì‚°
-df.std() #í‘œì¤€í¸ì°¨
-df['petal_width'].quantile([0.25,0.75]) #1,3ë¶„ìœ„ìˆ˜
-df['species'].apply(lambda x: x[:3]) #í•¨ìˆ˜ë¥¼ ì ìš©í•œ ê°’ --> ê²€ìƒ‰í•´ë³´ê¸°
+df.std() #?‘œì¤??¸ì°?
+df['petal_width'].quantile([0.25,0.75]) #1,3ë¶„ìœ„?ˆ˜
+df['species'].apply(lambda x: x[:3]) #?•¨?ˆ˜ë¥? ? ?š©?•œ ê°? --> ê²??ƒ‰?•´ë³´ê¸°
 
 # %% apply(function) 
 
-print(df['species'].apply(lambda x: x[0])) #ê´„í˜¸ ì•ˆì— í•¨ìˆ˜ ì‚¬ìš©
+print(df['species'].apply(lambda x: x[0])) #ê´„í˜¸ ?•ˆ?— ?•¨?ˆ˜ ?‚¬?š©
 df['species_3'] = df['species'].apply(lambda x: x[:3])
 df
 #%%
 def smp(x):
-        x = x[-3:] #ë’¤ì—ì„œ 3ë²ˆì§¸ê¹Œì§€ì˜ ë¬¸ìë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
+        x = x[-3:] #?’¤?—?„œ 3ë²ˆì§¸ê¹Œì???˜ ë¬¸ìë¥? ê°?? ¸?˜¤?Š” ?•¨?ˆ˜
         return x
 
 df['species-3'] = df['species'].apply(smp)
@@ -137,44 +137,44 @@ df
 
 
 # %% ************************ Make New Columns ************************ 
-# ìƒˆë¡œìš´ column ë§Œë“¤ê¸°
+# ?ƒˆë¡œìš´ column ë§Œë“¤ê¸?
 df = pd.DataFrame({'A':range(1,11),'B': np.random.randn(10)})
 print(df)
 
-df.assign(ln_A = lambda x: np.log(x.A) ) #ìƒˆë¡œìš´ column ìƒì„±
-df['ln_A'] = np.log(df.A) #ìœ„ì˜ assign ì½”ë“œë‘ ë™ì¼í•œ ì½”ë“œ
+df.assign(ln_A = lambda x: np.log(x.A) ) #?ƒˆë¡œìš´ column ?ƒ?„±
+df['ln_A'] = np.log(df.A) #?œ„?˜ assign ì½”ë“œ?‘ ?™?¼?•œ ì½”ë“œ
 
-# %% ìˆ«ìí˜• ë°ì´í„°ë¥¼ ì¹´í…Œê³ ë¦¬ì»¬ ë°ì´í„°ë¡œ --> ë²”ì£¼í™”
+# %% ?ˆ«??˜• ?°?´?„°ë¥? ì¹´í…Œê³ ë¦¬ì»? ?°?´?„°ë¡? --> ë²”ì£¼?™”
 print(pd.qcut(range(5), 3, labels=["good","medium",'bad']))
 pd.qcut(df.B,3,labels=['good','medium','bad'])
-# %% í–‰/ì—´ ê¸°ì¤€ ìµœëŒ€/ìµœì†Œê°’ 
-print(df.max(axis=1)) #rowì˜ ìµœëŒ€ê°’
-print(df.max(axis=0)) #columnì˜ ìµœëŒ€ê°’
-print(df.min(axis=1)) #rowì˜ ìµœì†Œê°’
-print(df.min(axis=0)) #columnì˜ ìµœì†Œê°’
+# %% ?–‰/?—´ ê¸°ì?? ìµœë??/ìµœì†Œê°? 
+print(df.max(axis=1)) #row?˜ ìµœë??ê°?
+print(df.max(axis=0)) #column?˜ ìµœë??ê°?
+print(df.min(axis=1)) #row?˜ ìµœì†Œê°?
+print(df.min(axis=0)) #column?˜ ìµœì†Œê°?
 
-# %% ì„ê³„ì¹˜ë¥¼ ì§€ì •í•´ì„œ ê°’ì„ ì§€ì •í•´ê¸°
+# %% ?„ê³„ì¹˜ë¥? ì§?? •?•´?„œ ê°’ì„ ì§?? •?•´ê¸?
 df['A'].clip(lower = -1, upper=5)
 
-# %% ì ˆëŒ€ê°’ ì”Œìš°ê¸°
+# %% ? ˆ???ê°? ?”Œ?š°ê¸?
 df['B'].abs()
 
 
 # %% ********************* Reshaping Data *********************
 
-# Value(ê°’)ì„ ì •ë ¬
-print(df.sort_values('ln_A')) # Columnì˜ Row ê°’ë“¤ì„ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
-print(df.sort_values('ln_A',ascending =False)) # Columnì˜ Row ê°’ë“¤ì„ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
-#%% ì´ë¦„ ë°”ê¾¸ê¸°
-df = df.rename(columns = {'A2':'A1'}) # Column ëª… ë°”ê¾¸ê¸°
-df = df.rename(index = {0:12,2:47,4:99}) # Row ëª… = index ë°”ê¾¸ê¸°
+# Value(ê°?)?„ ? •? ¬
+print(df.sort_values('ln_A')) # Column?˜ Row ê°’ë“¤?„ ?˜¤ë¦„ì°¨?ˆœ ? •? ¬
+print(df.sort_values('ln_A',ascending =False)) # Column?˜ Row ê°’ë“¤?„ ?‚´ë¦¼ì°¨?ˆœ ? •? ¬
+#%% ?´ë¦? ë°”ê¾¸ê¸?
+df = df.rename(columns = {'A2':'A1'}) # Column ëª? ë°”ê¾¸ê¸?
+df = df.rename(index = {0:12,2:47,4:99}) # Row ëª? = index ë°”ê¾¸ê¸?
 print(df)
-#%% index(row_name)ì„ ì •ë ¬
+#%% index(row_name)?„ ? •? ¬
 df.sort_index()
-#%% indexë¥¼ Columní™” / ì¸ë±ìŠ¤ ì´ˆê¸°í™”
-print(df.reset_index()) # indexë¥¼ ì´ˆê¸°í™”
-df.reset_index(drop=True) #ì¸ë±ìŠ¤ ì´ˆê¸°í™”
-#%% Column ì‚­ì œ
+#%% indexë¥? Column?™” / ?¸?±?Š¤ ì´ˆê¸°?™”
+print(df.reset_index()) # indexë¥? ì´ˆê¸°?™”
+df.reset_index(drop=True) #?¸?±?Š¤ ì´ˆê¸°?™”
+#%% Column ?‚­? œ
 df.drop(columns = ['A1'])
 
 # %% *****Tidy Data
@@ -185,39 +185,39 @@ df = pd.DataFrame({'A':{0:'a',1:'b',2:'c'},
                    })
 
 df
-#%% Colmnì„ Rowí™” ì‹œì¼œì„œ í¼ì¹˜ê¸° -->melt()
-pd.melt(df, id_vars=['A'], value_vars = ['B','C']) # A Column ê¸°ì¤€ìœ¼ë¡œ Rowë¡œ í¼ì¹˜ê¸°
+#%% Colmn?„ Row?™” ?‹œì¼œì„œ ?¼ì¹˜ê¸° -->melt()
+pd.melt(df, id_vars=['A'], value_vars = ['B','C']) # A Column ê¸°ì???œ¼ë¡? Rowë¡? ?¼ì¹˜ê¸°
 #%%
 pd.melt(df, value_vars = ['A','B','C'])
-# %% ë³€ê²½í•œ ë°ì´í„° ì´ë¦„ ë°”ê¾¸ê¸°
+# %% ë³?ê²½í•œ ?°?´?„° ?´ë¦? ë°”ê¾¸ê¸?
 pd.melt(df, value_vars = ['A','B','C']).rename(columns = {'variable':'VAR','Value':'VAL'})
 
-# %% meltì˜ ì—­ --> pivot()
+# %% melt?˜ ?—­ --> pivot()
 df2 = pd.DataFrame({'foo': ['one','one','one','two','two','two'],
                     'bar': ['A','B','C','A','B','C'],
                     'baz':[1, 2, 3, 4, 5, 6]
                     })
 df2.pivot(index = 'foo', columns = 'bar', values = 'baz')
-#%% index ë¦¬ì…‹í•˜ëŠ” ë²•
+#%% index ë¦¬ì…‹?•˜?Š” ë²?
 df3 = df2.pivot(index = 'foo', columns = 'bar', values = 'baz').reset_index()
-# %% melt í™œìš©
+# %% melt ?™œ?š©
 df3.melt(id_vars=['foo'], value_vars=['A','B','C'])
-# %% df3ë¥¼ fooì™€ barë¡œ ì •ë ¬í•˜ê¸°
+# %% df3ë¥? foo??? barë¡? ? •? ¬?•˜ê¸?
 df3.melt(id_vars=['foo'], value_vars=['A','B','C']).sort_values(['foo','bar'])
 
-# %% ìœ„ì˜ ë°ì´í„° ì»¬ëŸ¼ ëª… ë°”ê¾¸ê¸°
+# %% ?œ„?˜ ?°?´?„° ì»¬ëŸ¼ ëª? ë°”ê¾¸ê¸?
 df3.melt(id_vars=['foo'], value_vars=['A','B','C']).sort_values(['foo','bar']).rename(columns = {'value':'baz'})
 
-# %% concatì„ í™œìš©í•œ ë°ì´í„° í•©ì¹˜ê¸°
+# %% concat?„ ?™œ?š©?•œ ?°?´?„° ?•©ì¹˜ê¸°
 
-#ë°ì´í„° s1,s2ìƒì„±
+#?°?´?„° s1,s2?ƒ?„±
 s1 = pd.Series(['a','b'])
 s2 = pd.Series(['c','d'])
 print(s1,'\n',s2)
-# %% s1, s2 í•©ì¹˜ê¸°
+# %% s1, s2 ?•©ì¹˜ê¸°
 print(pd.concat([s1,s2], ignore_index=True))
-print(pd.concat([s1,s2],keys = ['s1','s2'])) #key ìƒì„±
-pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name ë¶™ì´ê¸°
+print(pd.concat([s1,s2],keys = ['s1','s2'])) #key ?ƒ?„±
+pd.concat([s1,s2],keys = ['s1','s2'], names = ['Series name','Row ID']) #column name ë¶™ì´ê¸?
 
 # %%
 df1 = pd.DataFrame([['a',1],['b',2]],
@@ -231,9 +231,9 @@ pd.concat([df1, df2])
 df3 = pd.DataFrame([['c',3,'cat'],['d',4,'dog']],
                    columns=['letter', 'number','animal'])
 df3
-#%% df1ê³¼ df3 í•©ì¹˜ê¸°
+#%% df1ê³? df3 ?•©ì¹˜ê¸°
 pd.concat([df1,df3])
-#%% join í•´ì„œ í•©ì¹˜ê¸°
+#%% join ?•´?„œ ?•©ì¹˜ê¸°
 df3 = pd.DataFrame([['c',3,'cat'],['d',4,'dof']], columns = ['letter','number','animal'])
 print(df3)
 pd.concat([df1,df3], join='inner')
@@ -246,7 +246,7 @@ print(df4,'\n')
 print(df5,'\n')
 print(df6)
 
-# %% ì¤‘ë³µëœ ê°’(index)ê°€ ìˆëŠ”ì§€ ê²€ì¦í•˜ëŠ” ê²ƒ
+# %% ì¤‘ë³µ?œ ê°?(index)ê°? ?ˆ?Š”ì§? ê²?ì¦í•˜?Š” ê²?
 pd.concat([df5, df6], verify_integrity=True)
-# %% í˜•íƒœê°€ ë‹¤ë¥¸ ë‘ ê°œì˜ dataframe í•©ì¹˜ê¸°
+# %% ?˜•?ƒœê°? ?‹¤ë¥? ?‘ ê°œì˜ dataframe ?•©ì¹˜ê¸°
 pd.concat([df1,df3])
